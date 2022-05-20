@@ -43,9 +43,11 @@ public class Juego {
                     hadasCapturadasPartida = mago.capturarHadas();
                     System.out.println("El mago capturo hadas ---> " + hadasCapturadasPartida);
                     topeHadasCapturadas += hadasCapturadasPartida;
+                    
+                    cantidadHadasCapturadas += topeHadasCapturadas;
+                    System.out.println("El mago tiene en su poder --->" + cantidadHadasCapturadas + "  hadas");
+                    
                     if(topeHadasCapturadas > 10){
-                        cantidadHadasCapturadas += topeHadasCapturadas;
-                        System.out.println("El mago tiene en su poder --->" + cantidadHadasCapturadas + "  hadas");
                         topeHadasCapturadas = 0;
                         mago.aumentarPoder();
                         System.out.println("El mago aumento su poder +1 ---->" + mago.getPoder());
@@ -57,6 +59,8 @@ public class Juego {
                     
                     if ( casasConstruidas > cantidadHadasCapturadas ){
                         System.out.println("El jugador construyo --->" + cantidadHadasCapturadas);
+                        // 3 casas *** 2 hadas
+                        // 1 sobra     casasConstruidas  - ( casasConstruidas - cantidadHadasCapturadas )
                         topeCasasConstruidas += cantidadHadasCapturadas;
                         cantidadHadasCapturadas = 0;
                     }else{
