@@ -30,6 +30,7 @@ public class Juego {
     public void iniciarJuego(){
         int hadasCapturadasPartida;
         int casasConstruidas;
+        int casasRestantes = 0;
         do{
             System.out.println("Número de partida --->" + (cantidadPartidas + 1) );
             partida = random.nextInt(3) + 1;
@@ -44,7 +45,7 @@ public class Juego {
                     System.out.println("El mago capturo hadas ---> " + hadasCapturadasPartida);
                     topeHadasCapturadas += hadasCapturadasPartida;
                     
-                    cantidadHadasCapturadas += topeHadasCapturadas;
+                    cantidadHadasCapturadas += hadasCapturadasPartida;
                     System.out.println("El mago tiene en su poder --->" + cantidadHadasCapturadas + "  hadas");
                     
                     if(topeHadasCapturadas > 10){
@@ -56,21 +57,40 @@ public class Juego {
                 case 2:
                     System.out.println("Partida del jugador");
                     casasConstruidas = jugador.construirCasas();
+                    System.out.println("Cantidad de casas construidas " + casasConstruidas);
+                    casasConstruidas += casasRestantes;
+                    if(casasRestantes > 0)
+                        System.out.println("Se sumaron las casas restantes");
+                    casasRestantes = 0;
                     
-                    if ( casasConstruidas > cantidadHadasCapturadas ){
-                        System.out.println("El jugador construyo --->" + cantidadHadasCapturadas);
-                        // 3 casas *** 2 hadas
-                        // 1 sobra     casasConstruidas  - ( casasConstruidas - cantidadHadasCapturadas )
-                        topeCasasConstruidas += cantidadHadasCapturadas;
-                        cantidadHadasCapturadas = 0;
+                    /*if ( casasConstruidas > cantidadHadasCapturadas ){
+                        
+                        
                     }else{
-                        System.out.println("El jugador construyo --->" + casasConstruidas);
-                        System.out.println("El jugador libero ---> " + casasConstruidas + "  hadas");
+                       
+                    } */
+                    
+                    if(cantidadHadasCapturadas > casasConstruidas){
+                        System.out.println("El jugador construyo (1)--->" + casasConstruidas);
+                        System.out.println("El jugador libero (1)---> " + casasConstruidas + "  hadas");
                         
                         cantidadHadasCapturadas -= casasConstruidas;
                         topeCasasConstruidas += casasConstruidas;
                         
                         System.out.println("Hadas aún atrapadas --->" + cantidadHadasCapturadas);
+                    }else{
+                        System.out.println("El jugador construyo (2)--->" + casasConstruidas);
+                        // 3 casas *** 2 hadas
+                        // 1 sobra     casasConstruidas  - ( casasConstruidas - cantidadHadasCapturadas )
+                        topeCasasConstruidas += cantidadHadasCapturadas;
+                        if( (casasConstruidas - cantidadHadasCapturadas) > 0){
+                            System.out.println("Cantidad de casas restantes " + (casasConstruidas - cantidadHadasCapturadas) );
+                            casasRestantes += casasConstruidas - cantidadHadasCapturadas;
+                        }
+                        
+                        System.out.println("El jugador libero(2) ---> " + cantidadHadasCapturadas + "  hadas");
+                       
+                        cantidadHadasCapturadas = 0;
                     }
                     
                     if (topeCasasConstruidas > 10){
